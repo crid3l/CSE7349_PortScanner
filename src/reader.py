@@ -9,4 +9,4 @@ print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
     # We're only interested packets with a DNS Round Robin layer
-    packet[2]
+    packet.summary()
