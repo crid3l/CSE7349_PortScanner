@@ -14,6 +14,10 @@ for packet in packets:
         print("TCP Src: " + str(TCP.sport))
         print("TCP Dst: " + str(TCP.dport))
         print("Options: " + str(TCP.options))
+        if len(TCP.options) != 0:
+            for x in TCP.options:
+                if(x.contains('Timestamp')):
+                    print("True")
     except IndexError:
         pass
     packet.show()
