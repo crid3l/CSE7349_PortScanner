@@ -8,13 +8,15 @@ packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
-    # We're only interested packets with a DNS Round Robin layer
-    try:
-        TCP = packet['TCP']
-        print(TCP.options)
-    except IndexError:
-        TCP.show()
-        pass
+    TCP = packet['TCP']
+    TCP.show()
+
+    # try:
+    #     TCP = packet['TCP']
+    #     print(TCP.options)
+    # except IndexError:
+    #     TCP.show()
+    #     pass
 
     # print(TCP.sport)
     # print(TCP.dport)
