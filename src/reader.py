@@ -8,7 +8,7 @@ packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
-    TCP = Packet['TCP']
+    TCP = packet['TCP']
     TCP.show()
 
     # try:
