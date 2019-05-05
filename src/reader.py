@@ -10,7 +10,8 @@ print("Loading Packets")
 for packet in packets:
     # We're only interested packets with a DNS Round Robin layer
     TCP = packet['TCP']
-    print(TCP.show())
+    print(TCP.options)
+
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
