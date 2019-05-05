@@ -9,8 +9,12 @@ print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
     # We're only interested packets with a DNS Round Robin layer
-    TCP = packet['TCP']
-    print(TCP.options)
+    try:
+        TCP = packet['TCP']
+        print(TCP.options)
+    except IndexError:
+        continue
+        pass
 
     # print(TCP.sport)
     # print(TCP.dport)
