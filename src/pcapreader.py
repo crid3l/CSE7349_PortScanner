@@ -6,7 +6,6 @@ paths = ["connect_scan.pcapng",  "multiplescans.pcapng",  "scan.pcapng",  "tcp_s
 def main():
     print("Hello World")
     myCap = open(basePath + paths[0], 'rb')
-    print(myCap.read())
     # capfile = savefile.load_savefile(myCap, verbose=True)
     # print (capfile)
     # return
