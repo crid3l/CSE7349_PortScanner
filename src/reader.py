@@ -9,7 +9,9 @@ print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
     TCP = packet['TCP']
-    TCP.show()
+    print("TCP Src" + TCP.sport)
+    print("TCP Dst" + TCP.dport)
+    print("Options" + TCP.options)
 
     # try:
     #     TCP = packet['TCP']
