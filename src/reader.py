@@ -8,17 +8,16 @@ packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
-    TCP = packet['TCP']
-    print("TCP Src" + str(TCP.sport))
-    print("TCP Dst" + str(TCP.dport))
-    print("Options" + str(TCP.options))
 
-    # try:
-    #     TCP = packet['TCP']
-    #     print(TCP.options)
-    # except IndexError:
-    #     TCP.show()
-    #     pass
+
+    try:
+        TCP = packet['TCP']
+        print("TCP Src: " + str(TCP.sport))
+        print("TCP Dst: " + str(TCP.dport))
+        print("Options: " + str(TCP.options))
+    except IndexError:
+        TCP.show()
+        pass
 
     # print(TCP.sport)
     # print(TCP.dport)
