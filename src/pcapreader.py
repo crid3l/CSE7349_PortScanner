@@ -1,5 +1,7 @@
 from pcapfile import savefile
 
+basePath = "../../../../opt/scans"
+
 def main():
     return
 
