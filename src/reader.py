@@ -16,7 +16,7 @@ for packet in packets:
         print("Options: " + str(TCP.options))
         if len(TCP.options) != 0:
             for x in TCP.options:
-                if(x.contains('Timestamp')):
+                if(x.__contains__('Timestamp')):
                     print("True")
     except IndexError:
         pass
