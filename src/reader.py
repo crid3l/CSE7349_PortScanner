@@ -9,16 +9,14 @@ print("Loading Packets")
 # Let's iterate through every packet
 for packet in packets:
 
-
     try:
         TCP = packet['TCP']
         print("TCP Src: " + str(TCP.sport))
         print("TCP Dst: " + str(TCP.dport))
         print("Options: " + str(TCP.options))
     except IndexError:
-        TCP.show()
         pass
-
+    packet.show()
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
