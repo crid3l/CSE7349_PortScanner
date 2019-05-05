@@ -9,6 +9,7 @@ def main():
     capfile = savefile.load_savefile(myCap, verbose=True)
     # print (capfile)
     # return
+    myCap.close()
     return
 
 if __name__ == '__main__':
