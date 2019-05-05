@@ -6,10 +6,7 @@ paths = ["connect_scan.pcapng",  "multiplescans.pcapng",  "scan.pcapng",  "tcp_s
 # rdpcap comes from scapy and loads in our pcap file
 packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
-
-packets.summary()
-
-# # Let's iterate through every packet
-# for packet in packets:
-#     # We're only interested packets with a DNS Round Robin layer
-#     packet.summary()
+# Let's iterate through every packet
+for packet in packets:
+    # We're only interested packets with a DNS Round Robin layer
+    packet.show()
