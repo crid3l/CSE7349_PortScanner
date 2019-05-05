@@ -11,7 +11,7 @@ for packet in packets:
     TCP = packet['TCP']
     print("TCP Src" + str(TCP.sport))
     print("TCP Dst" + str(TCP.dport))
-    print("Options" +TCP.options)
+    print("Options" + str(TCP.options))
 
     # try:
     #     TCP = packet['TCP']
