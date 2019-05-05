@@ -13,7 +13,7 @@ for packet in packets:
         TCP = packet['TCP']
         print(TCP.options)
     except IndexError:
-        print("not TCP")
+        TCP.show()
         pass
 
     # print(TCP.sport)
