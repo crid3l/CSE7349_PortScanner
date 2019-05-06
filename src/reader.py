@@ -58,6 +58,7 @@ for packet in packets:
                     }
                 }
                 sourcePorts[TCP.sport] = x
+                print (sourcePorts[TCP.sport])
     except IndexError:
         # packet.show()
         continue
