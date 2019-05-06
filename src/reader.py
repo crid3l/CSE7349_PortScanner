@@ -26,13 +26,26 @@ for packet in packets:
         # print("Options: " + str(TCP.options))
         # print("Flags:   " + str(TCP.flags))
         # print("Window:  " + str(TCP.window))
-        if IP.dst == "129.119.201.21":
-            sourcePorts[TCP.sport] = "Hit"
+        timeStamp = ()
         if len(TCP.options) != 0:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
                     timeStamp = x[1]
                     print(timeStamp)
+
+        # check if address is local
+        if IP.dst == "129.119.201.21":
+            if TCP.sport in sourcePorts:
+                continue
+            else:
+                x = {
+                    "start": timeStamp[0],
+                    "end": timeStamp[1],
+                    "dst": {
+                        TCP.dst : 1
+                    },
+                }
+                sourcePorts[TCP.sport] = x
     except IndexError:
         packet.show()
         continue
