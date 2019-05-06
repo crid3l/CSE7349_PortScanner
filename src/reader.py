@@ -56,7 +56,8 @@ for packet in packets:
                 port = sourcePorts[IP.src]
                 try:
                     port['end'] = timeStamp[1]
-                except: port['end'] = -1
+                except: 
+                    continue
                 
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
@@ -91,7 +92,15 @@ for packet in packets:
 print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
-    print(val)
+    i = 0
+    for dst, cnt in val.dst:
+        if cnt <= 3:
+            i = i + 1
+        if i > 10:
+            break
+    if i > 10:
+        print(key + " likely engaged in a port scan.")
+    
     # print(IP.src)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
