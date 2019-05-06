@@ -38,7 +38,7 @@ for packet in packets:
             # check if current packet TCP field exist in sourceport list
             if TCP.sport in sourcePorts:
                 # if so, we wan to update the end field
-                port = sourcePorts[TCP.port]
+                port = sourcePorts[TCP.sport]
                 port['end'] = timeStamp[1]
                 
                 #and add or increment a new destination.
@@ -46,7 +46,7 @@ for packet in packets:
                     port['dst'][TCP.dport] = port['dst'][TCP.dport] + 1
                 else:
                     port['dst'][TCP.dport] = 1
-                sourcePorts[TCP.spot] = port
+                sourcePorts[TCP.sport] = port
             # or initialize a new  port in the list
             else:
                 x = {
