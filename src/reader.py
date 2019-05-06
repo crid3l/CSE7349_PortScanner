@@ -42,8 +42,8 @@ for packet in packets:
                     "start": timeStamp[0],
                     "end": timeStamp[1],
                     "dst": {
-                        TCP.dst : 1
-                    },
+                        TCP.dport : 1
+                    }
                 }
                 sourcePorts[TCP.sport] = x
     except IndexError:
