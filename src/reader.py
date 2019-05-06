@@ -26,7 +26,8 @@ for packet in packets:
         print("Options: " + str(TCP.options))
         print("Flags:   " + str(TCP.flags))
         print("Window:  " + str(TCP.window))
-        sourcePorts[TCP.sport] = "Hit"
+        if TCP.dport == 22:
+            sourcePorts[TCP.sport] = "Hit"
         if len(TCP.options) != 0:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
