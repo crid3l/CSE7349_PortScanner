@@ -81,7 +81,7 @@ for packet in packets:
                         }
                     }
                 sourcePorts[IP.src] = x
-    except IndexError as e:
+    except IndentationError as e:
         print(e)
         packet.show()
         continue
