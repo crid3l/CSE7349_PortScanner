@@ -1,7 +1,7 @@
 from scapy.all import *
 
 basePath = "./../../../../opt/scans/"
-paths = ["connect_scan.pcapng",  "multiplescans.pcapng",  "scan.pcapng",  "tcp_syn_scan.pcapng"]
+paths = ["connect_scan.pcapng",  "scan.pcapng",  "tcp_syn_scan.pcapng"]
 
 destinationPorts = {}
 sourcePorts = {}
