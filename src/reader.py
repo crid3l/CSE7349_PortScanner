@@ -93,13 +93,14 @@ print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
     i = 0
-    for dst, cnt in val.dst.items():
-        if cnt <= 3:
-            i = i + 1
-        if i > 10:
-            break
-    if i > 10:
-        print(key + " likely engaged in a port scan.")
+    print(val.dst)
+    # for dst, cnt in val.dst.items():
+    #     if cnt <= 3:
+    #         i = i + 1
+    #     if i > 10:
+    #         break
+    # if i > 10:
+    #     print(key + " likely engaged in a port scan.")
     
     # print(IP.src)
     # print(TCP.dport)
