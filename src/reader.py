@@ -12,21 +12,21 @@ print("Loading Packets")
 print()
 # Let's iterate through every packet
 for packet in packets:
-    print("$$$$$*****PACKET-BEGIN*****$$$$$")
+    # print("$$$$$*****PACKET-BEGIN*****$$$$$")
     try:
         IP = packet['IP']
-        print("\t--sIP--")
-        print("IP Src:   " + str(IP.src))
-        print("IP Dst:   " + str(IP.dst))
-        print("Flags:   " + str(IP.flags))
+        # print("\t--sIP--")
+        # print("IP Src:   " + str(IP.src))
+        # print("IP Dst:   " + str(IP.dst))
+        # print("Flags:   " + str(IP.flags))
         TCP = packet['TCP']
-        print("\t--TCP--")
-        print("TCP Src: " + str(TCP.sport))
-        print("TCP Dst: " + str(TCP.dport))
-        print("Options: " + str(TCP.options))
-        print("Flags:   " + str(TCP.flags))
-        print("Window:  " + str(TCP.window))
-        if TCP.dport == 22:
+        # print("\t--TCP--")
+        # print("TCP Src: " + str(TCP.sport))
+        # print("TCP Dst: " + str(TCP.dport))
+        # print("Options: " + str(TCP.options))
+        # print("Flags:   " + str(TCP.flags))
+        # print("Window:  " + str(TCP.window))
+        if IP.dst == "129.119.201.21":
             sourcePorts[TCP.sport] = "Hit"
         if len(TCP.options) != 0:
             for x in TCP.options:
@@ -36,7 +36,7 @@ for packet in packets:
     except IndexError:
         packet.show()
         continue
-    print("$$$$$*****PACKET-END*****$$$$$")
+    # print("$$$$$*****PACKET-END*****$$$$$")
     print("")
 print(destinationPorts)
 print(sourcePorts)
