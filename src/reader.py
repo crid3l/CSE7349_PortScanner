@@ -64,13 +64,22 @@ for packet in packets:
                 sourcePorts[IP.src] = port
             # or initialize a new  port in the list
             else:
-                x = {
-                    "start": timeStamp[0],
-                    "end": timeStamp[1],
-                    "dst": {
-                        TCP.dport : 1
+                try:
+                    x = {
+                        "start": timeStamp[0],
+                        "end": timeStamp[1],
+                        "dst": {
+                            TCP.dport : 1
+                        }
                     }
-                }
+                except:
+                    x = {
+                        "start": -1,
+                        "end": -1,
+                        "dst": {
+                            TCP.dport : 1
+                        }
+                    }
                 sourcePorts[IP.src] = x
     except IndentationError as e:
         print(e)
