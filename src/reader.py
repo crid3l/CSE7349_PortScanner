@@ -39,7 +39,7 @@ for packet in packets:
             if TCP.sport in sourcePorts:
                 # if so, we wan to update the end field
                 port = sourcePorts[TCP.sport]
-                port['end']: timeStamp[1]
+                port['end'] = timeStamp[1]
                 
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
