@@ -23,7 +23,7 @@ for packet in packets:
         print("TCP Dst: " + str(TCP.dport))
         print("Options: " + str(TCP.options))
         print("Flags:   " + str(TCP.flags))
-        print("Window:  " + str(TCP.Window))
+        print("Window:  " + str(TCP.window))
         if len(TCP.options) != 0:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
