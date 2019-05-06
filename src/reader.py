@@ -58,7 +58,7 @@ for packet in packets:
                 }
                 sourcePorts[IP.src] = x
     except IndexError:
-        packet.show()
+        # packet.show()
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
     print("")
