@@ -45,7 +45,7 @@ for packet in packets:
                         try:
                             timeStamp = x[1]
                         except IndexError as e:
-                            timeStamp = (-1, -1)
+                            continue
                         # print(timeStamp)
 
         # check if address is local
@@ -56,8 +56,7 @@ for packet in packets:
                 port = sourcePorts[IP.src]
                 try:
                     port['end'] = timeStamp[1]
-                except: 
-                    continue
+                except: port['end'] = -1
                 
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
@@ -84,7 +83,7 @@ for packet in packets:
                         }
                     }
                 sourcePorts[IP.src] = x
-    except IndexError as e:
+    except IndentationError as e:
         print(e)
         packet.show()
         continue
@@ -92,16 +91,7 @@ for packet in packets:
 print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
-    i = 0
     print(val)
-    # for dst, cnt in val.dst.items():
-    #     if cnt <= 3:
-    #         i = i + 1
-    #     if i > 10:
-    #         break
-    # if i > 10:
-    #     print(key + " likely engaged in a port scan.")
-    
     # print(IP.src)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
