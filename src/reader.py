@@ -93,7 +93,7 @@ print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
     i = 0
-    for dst, cnt in val.dst:
+    for dst, cnt in val.dst.item():
         if cnt <= 3:
             i = i + 1
         if i > 10:
