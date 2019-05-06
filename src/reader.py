@@ -21,7 +21,7 @@ for packet in packets:
         # print("IP Src:   " + str(IP.src))
         # print("IP Dst:   " + str(IP.dst))
         # print("Flags:   " + str(IP.flags))
-        flag = Fa
+        flag = False
         TCP = {}
         if 'TCP' in packet:
             TCP = packet['TCP']
