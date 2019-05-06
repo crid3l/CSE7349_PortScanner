@@ -35,9 +35,9 @@ for packet in packets:
     except IndexError:
         packet.show()
         continue
-    print(destinationPorts)
-    print(sourcePorts)
     print("$$$$$*****PACKET-END*****$$$$$")
+print(destinationPorts)
+print(sourcePorts)
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
