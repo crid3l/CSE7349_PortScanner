@@ -31,7 +31,7 @@ for packet in packets:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
                     timeStamp = x[1]
-                    print(timeStamp)
+                    #print(timeStamp)
 
         # check if address is local
         if IP.dst == "129.119.201.21":
