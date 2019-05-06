@@ -3,6 +3,9 @@ from scapy.all import *
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng",  "multiplescans.pcapng",  "scan.pcapng",  "tcp_syn_scan.pcapng"]
 
+destinationPorts = {}
+sourcePorts = {}
+
 # rdpcap comes from scapy and loads in our pcap file
 packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
@@ -23,6 +26,7 @@ for packet in packets:
         print("Options: " + str(TCP.options))
         print("Flags:   " + str(TCP.flags))
         print("Window:  " + str(TCP.window))
+        destinationPorts[TCP.dport] = "Hit"
         if len(TCP.options) != 0:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
@@ -31,7 +35,9 @@ for packet in packets:
     except IndexError:
         packet.show()
         continue
-    print("*****PACKET-END*****")
+    print(destinationPorts)
+    print(sourcePorts)
+    print("$$$$$*****PACKET-END*****$$$$$")
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
