@@ -10,19 +10,20 @@ print()
 # Let's iterate through every packet
 for packet in packets:
     print("-----PACKET-BEGIN-----")
-    try:
-        TCP = packet['TCP']
-        print("TCP Src: " + str(TCP.sport))
-        print("TCP Dst: " + str(TCP.dport))
-        print("Options: " + str(TCP.options))
-        if len(TCP.options) != 0:
-            for x in TCP.options:
-                if(x.__contains__('Timestamp')):
-                    timeStamp = x[1]
-                    print(timeStamp)
-    except IndexError:
-        packet.show()
-        continue
+    packet.show()
+    # try:
+    #     TCP = packet['TCP']
+    #     print("TCP Src: " + str(TCP.sport))
+    #     print("TCP Dst: " + str(TCP.dport))
+    #     print("Options: " + str(TCP.options))
+    #     if len(TCP.options) != 0:
+    #         for x in TCP.options:
+    #             if(x.__contains__('Timestamp')):
+    #                 timeStamp = x[1]
+    #                 print(timeStamp)
+    # except IndexError:
+    #     packet.show()
+    #     continue
     print("-----PACKET-END-----")
     print()
     # print(TCP.sport)
