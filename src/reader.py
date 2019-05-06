@@ -66,7 +66,6 @@ print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
     print(val)
-    break
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
