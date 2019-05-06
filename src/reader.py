@@ -6,8 +6,10 @@ paths = ["connect_scan.pcapng",  "multiplescans.pcapng",  "scan.pcapng",  "tcp_s
 # rdpcap comes from scapy and loads in our pcap file
 packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
+print()
 # Let's iterate through every packet
 for packet in packets:
+    print("-----PACKET-BEGIN-----")
     try:
         TCP = packet['TCP']
         print("TCP Src: " + str(TCP.sport))
@@ -22,6 +24,8 @@ for packet in packets:
     except IndexError:
         packet.show()
         continue
+    print("-----PACKET-END-----")
+    print()
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
