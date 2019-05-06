@@ -16,7 +16,7 @@ for packet in packets:
         print("IP Src:   " + str(IP.src))
         print("IP Dst:   " + str(IP.dst))
         print("Flags:   " + str(IP.flags))
-        print()
+        print("\n")
         TCP = packet['TCP']
         print("\t__TCP__")
         print("TCP Src: " + str(TCP.sport))
