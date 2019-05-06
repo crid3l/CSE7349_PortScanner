@@ -84,7 +84,7 @@ for packet in packets:
                         }
                     }
                 sourcePorts[IP.src] = x
-    except IndentationError as e:
+    except IndexError as e:
         print(e)
         packet.show()
         continue
@@ -93,7 +93,7 @@ print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
     i = 0
-    print(val)
+    print(val['dst'])
     # for dst, cnt in val.dst.items():
     #     if cnt <= 3:
     #         i = i + 1
