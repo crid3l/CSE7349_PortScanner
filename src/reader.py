@@ -21,7 +21,7 @@ for packet in packets:
         # print("IP Src:   " + str(IP.src))
         # print("IP Dst:   " + str(IP.dst))
         # print("Flags:   " + str(IP.flags))
-        flag = False
+        flag = Fa
         TCP = {}
         if 'TCP' in packet:
             TCP = packet['TCP']
@@ -72,7 +72,7 @@ for packet in packets:
                     }
                 }
                 sourcePorts[IP.src] = x
-    except IndexError as e:
+    except IndentationError as e:
         print(e)
         packet.show()
         continue
