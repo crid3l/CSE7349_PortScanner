@@ -45,7 +45,7 @@ for packet in packets:
                         try:
                             timeStamp = x[1]
                         except IndexError as e:
-                            continue
+                            pass
                         # print(timeStamp)
 
         # check if address is local
@@ -56,7 +56,8 @@ for packet in packets:
                 port = sourcePorts[IP.src]
                 try:
                     port['end'] = timeStamp[1]
-                except: port['end'] = -1
+                except: 
+                    pass
                 
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
