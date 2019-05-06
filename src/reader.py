@@ -9,22 +9,30 @@ print("Loading Packets")
 print()
 # Let's iterate through every packet
 for packet in packets:
-    print("-----PACKET-BEGIN-----")
-    packet.show()
-    # try:
-    #     TCP = packet['TCP']
-    #     print("TCP Src: " + str(TCP.sport))
-    #     print("TCP Dst: " + str(TCP.dport))
-    #     print("Options: " + str(TCP.options))
-    #     if len(TCP.options) != 0:
-    #         for x in TCP.options:
-    #             if(x.__contains__('Timestamp')):
-    #                 timeStamp = x[1]
-    #                 print(timeStamp)
-    # except IndexError:
-    #     packet.show()
-    #     continue
-    print("-----PACKET-END-----")
+    print("*****PACKET-BEGIN*****")
+    try:
+        IP = packet['IP']
+        print("__IP__")
+        print("IP Src:   " + str(IP.src))
+        print("IP Dst:   " + str(IP.dst))
+        print("Flags:   " + str(IP.flags))
+        print()
+        TCP = packet['TCP']
+        print("__TCP__")
+        print("TCP Src: " + str(TCP.sport))
+        print("TCP Dst: " + str(TCP.dport))
+        print("Options: " + str(TCP.options))
+        print("Flags:   " + str(TCP.flags))
+        print("Window:  " + str(TCP.Window))
+        if len(TCP.options) != 0:
+            for x in TCP.options:
+                if(x.__contains__('Timestamp')):
+                    timeStamp = x[1]
+                    print(timeStamp)
+    except IndexError:
+        packet.show()
+        continue
+    print("*****PACKET-END*****")
     print()
     # print(TCP.sport)
     # print(TCP.dport)
