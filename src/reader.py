@@ -45,7 +45,7 @@ for packet in packets:
                         try:
                             timeStamp = x[1]
                         except IndexError as e:
-                            timeStamp = ()
+                            timeStamp = (-1, -1)
                         # print(timeStamp)
 
         # check if address is local
@@ -72,7 +72,7 @@ for packet in packets:
                             TCP.dport : 1
                         }
                     }
-                except:
+                except :
                     x = {
                         "start": -1,
                         "end": -1,
@@ -81,7 +81,7 @@ for packet in packets:
                         }
                     }
                 sourcePorts[IP.src] = x
-    except IndentationError as e:
+    except IndexError as e:
         print(e)
         packet.show()
         continue
