@@ -12,13 +12,13 @@ for packet in packets:
     print("*****PACKET-BEGIN*****")
     try:
         IP = packet['IP']
-        print("__IP__")
+        print("\t__IP__")
         print("IP Src:   " + str(IP.src))
         print("IP Dst:   " + str(IP.dst))
         print("Flags:   " + str(IP.flags))
         print()
         TCP = packet['TCP']
-        print("__TCP__")
+        print("\t__TCP__")
         print("TCP Src: " + str(TCP.sport))
         print("TCP Dst: " + str(TCP.dport))
         print("Options: " + str(TCP.options))
@@ -33,7 +33,7 @@ for packet in packets:
         packet.show()
         continue
     print("*****PACKET-END*****")
-    print()
+    print("\n\n\n")
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
