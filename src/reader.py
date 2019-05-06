@@ -36,9 +36,9 @@ for packet in packets:
         # check if address is local
         if IP.dst == "129.119.201.21":
             # check if current packet TCP field exist in sourceport list
-            if TCP.sport in sourcePorts:
+            if IP.src in sourcePorts:
                 # if so, we wan to update the end field
-                port = sourcePorts[TCP.sport]
+                port = sourcePorts[IP.src]
                 port['end'] = timeStamp[1]
                 
                 #and add or increment a new destination.
@@ -46,7 +46,7 @@ for packet in packets:
                     port['dst'][TCP.dport] = port['dst'][TCP.dport] + 1
                 else:
                     port['dst'][TCP.dport] = 1
-                sourcePorts[TCP.sport] = port
+                sourcePorts[IP.src] = port
             # or initialize a new  port in the list
             else:
                 x = {
@@ -56,7 +56,7 @@ for packet in packets:
                         TCP.dport : 1
                     }
                 }
-                sourcePorts[TCP.sport] = x
+                sourcePorts[IP.src] = x
     except IndexError:
         packet.show()
         continue
