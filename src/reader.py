@@ -15,12 +15,11 @@ for packet in packets:
         print("TCP Src: " + str(TCP.sport))
         print("TCP Dst: " + str(TCP.dport))
         print("Options: " + str(TCP.options))
-        timeStamp = ()
         if len(TCP.options) != 0:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
                     timeStamp = x[1]
-        print(timeStamp)
+                    print(timeStamp)
     except IndexError:
         packet.show()
         continue
