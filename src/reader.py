@@ -43,7 +43,7 @@ for packet in packets:
                 
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
-                    port['dst'][TCP.dport] = port['dst'] + 1
+                    port['dst'][TCP.dport] = port['dst'][TCP.dport] + 1
                 else:
                     port['dst'][TCP.dport] = 1
                 sourcePorts[TCP.sport] = port
