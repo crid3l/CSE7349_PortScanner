@@ -9,16 +9,15 @@ print("Loading Packets")
 print()
 # Let's iterate through every packet
 for packet in packets:
-    print("*****PACKET-BEGIN*****")
+    print("$$$$$*****PACKET-BEGIN*****$$$$$")
     try:
         IP = packet['IP']
-        print("\t__IP__")
+        print("\t--sIP--")
         print("IP Src:   " + str(IP.src))
         print("IP Dst:   " + str(IP.dst))
         print("Flags:   " + str(IP.flags))
-        print("\n")
         TCP = packet['TCP']
-        print("\t__TCP__")
+        print("\t--TCP--")
         print("TCP Src: " + str(TCP.sport))
         print("TCP Dst: " + str(TCP.dport))
         print("Options: " + str(TCP.options))
@@ -33,7 +32,6 @@ for packet in packets:
         packet.show()
         continue
     print("*****PACKET-END*****")
-    print("\n\n\n")
     # print(TCP.sport)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
