@@ -1,14 +1,14 @@
 from scapy.all import *
 
 basePath = "./../../../../opt/scans/"
-paths = ["connect_scan.pcapng",  "scan.pcapng",  "tcp_syn_scan.pcapng"]
+paths = ["connect_scan.pcapng",  "multiplescans.pcapng",  "scan.pcapng",  "tcp_syn_scan.pcapng"]
 
 destinationPorts = {}
 sourcePorts = {}
 
 # rdpcap comes from scapy and loads in our pcap file
+packets = rdpcap(basePath + paths[0])
 print("Loading Packets")
-packets = rdpcap(basePath + paths[1])
 print()
 # Let's iterate through every packet
 for packet in packets:
@@ -31,7 +31,7 @@ for packet in packets:
             for x in TCP.options:
                 if(x.__contains__('Timestamp')):
                     timeStamp = x[1]
-                    #print(timeStamp)
+                    print(timeStamp)
 
         # check if address is local
         if IP.dst == "129.119.201.21":
@@ -49,7 +49,6 @@ for packet in packets:
                 sourcePorts[TCP.sport] = port
             # or initialize a new  port in the list
             else:
-                print("New port" +  str(TCP.sport))
                 x = {
                     "start": timeStamp[0],
                     "end": timeStamp[1],
@@ -58,11 +57,11 @@ for packet in packets:
                     }
                 }
                 sourcePorts[TCP.sport] = x
-                print (sourcePorts[TCP.sport])
     except IndexError:
-        # packet.show()
+        packet.show()
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
+    print("")
 print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
