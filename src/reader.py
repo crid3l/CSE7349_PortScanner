@@ -1,5 +1,4 @@
 from scapy.all import *
-from colorama import Fore, Back, Style
 
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng",  "scan.pcapng",  "tcp_syn_scan.pcapng"]
@@ -8,8 +7,7 @@ destinationPorts = {}
 sourcePorts = {}
 
 # rdpcap comes from scapy and loads in our pcap file
-print(Fore.LIGHTBLUE_EX + "Loading Packets")
-print(Style.RESET_ALL)
+print("Loading Packets")
 packets = rdpcap(basePath + paths[1])
 print()
 # Let's iterate through every packet
@@ -63,7 +61,7 @@ for packet in packets:
         # packet.show()
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
-print(Fore.LIGHTWHITE_EX + destinationPorts)
+print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
     print(val)
