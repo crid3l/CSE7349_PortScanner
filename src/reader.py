@@ -49,6 +49,7 @@ for packet in packets:
                 sourcePorts[TCP.sport] = port
             # or initialize a new  port in the list
             else:
+                print("New port" +  str(TCP.sport))
                 x = {
                     "start": timeStamp[0],
                     "end": timeStamp[1],
