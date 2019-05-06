@@ -14,24 +14,32 @@ print()
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
     try:
-        IP = packet['IP']
+        IP = {}
+        if 'IP' in packet:
+            IP = packet['IP']
         # print("\t--sIP--")
         # print("IP Src:   " + str(IP.src))
         # print("IP Dst:   " + str(IP.dst))
         # print("Flags:   " + str(IP.flags))
-        TCP = packet['TCP']
+        flag = False;
+        if 'TCP' in packet:
+            TCP = packet['TCP']
+            flag = True
+        else:
+            TCP = packet['UDP']
         # print("\t--TCP--")
         # print("TCP Src: " + str(IP.src))
         # print("TCP Dst: " + str(TCP.dport))
         # print("Options: " + str(TCP.options))
         # print("Flags:   " + str(TCP.flags))
         # print("Window:  " + str(TCP.window))
-        timeStamp = ()
-        if len(TCP.options) != 0:
-            for x in TCP.options:
-                if(x.__contains__('Timestamp')):
-                    timeStamp = x[1]
-                    # print(timeStamp)
+        if(flag):
+            timeStamp = ()
+            if len(TCP.options) != 0:
+                for x in TCP.options:
+                    if('Timestamp' in x):
+                        timeStamp = x[1]
+                        # print(timeStamp)
 
         # check if address is local
         if IP.dst == "129.119.201.21":
