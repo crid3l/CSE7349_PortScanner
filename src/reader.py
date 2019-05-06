@@ -21,12 +21,16 @@ for packet in packets:
         # print("IP Src:   " + str(IP.src))
         # print("IP Dst:   " + str(IP.dst))
         # print("Flags:   " + str(IP.flags))
-        flag = False;
+        flag = False
+        TCP = {}
         if 'TCP' in packet:
             TCP = packet['TCP']
             flag = True
-        else:
+        elif 'UDP' in packet:
             TCP = packet['UDP']
+        else:
+            continue
+
         # print("\t--TCP--")
         # print("TCP Src: " + str(IP.src))
         # print("TCP Dst: " + str(TCP.dport))
@@ -38,7 +42,10 @@ for packet in packets:
             if len(TCP.options) != 0:
                 for x in TCP.options:
                     if('Timestamp' in x):
-                        timeStamp = x[1]
+                        try:
+                            timeStamp = x[1]
+                        except IndexError as e:
+                            timeStamp = ()
                         # print(timeStamp)
 
         # check if address is local
