@@ -90,7 +90,7 @@ for key, val in sourcePorts.items():
         string = ""
         j = 0
         for k in portRange:
-            if j < 5:
+            if j > 4:
                 string = string + " " + str(k)
                 j = j + 1
             else:
