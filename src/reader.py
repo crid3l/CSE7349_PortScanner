@@ -74,11 +74,13 @@ for packet in packets:
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
 for key, val in sourcePorts.items():
+    portList = []
     i = 0
     for dst, cnt in val['dst'].items():
         if cnt <= 3:
             i = i + 1
         if i >= 10:
+            portList.append(dst)
             break
     if i >= 10:
         portRange = val['dst'].keys()
@@ -86,17 +88,9 @@ for key, val in sourcePorts.items():
         print("IP " + key + " likely engaged in Port Scanning")
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
+        print("Ports: ")
+        print(portList)
         # print(portRange)
-        string = ""
-        j = 0
-        for k in portRange:
-            if j > 4:
-                string = string + " " + str(k)
-                j = j + 1
-            else:
-                print(string)
-                string = ""
-                j = 0
     # print(TCP.dport)
     # print(packet['TCP'].sport)
     # print(packet['TCP'])
