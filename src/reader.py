@@ -94,7 +94,8 @@ for key, val in sourcePorts.items():
                 string = string + " " + str(k)
                 j = j + 1
             else:
-                string = string = "\n" + str(k)
+                print(string)
+                string = ""
                 j = 0
     # print(TCP.dport)
     # print(packet['TCP'].sport)
