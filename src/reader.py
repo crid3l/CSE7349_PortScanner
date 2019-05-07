@@ -37,8 +37,8 @@ for packet in packets:
         # print("Options: " + str(TCP.options))
         # print("Flags:   " + str(TCP.flags))
         # print("Window:  " + str(TCP.window))
+        timeStamp = ()
         if(flag):
-            timeStamp = ()
             if len(TCP.options) != 0:
                 for x in TCP.options:
                     if('Timestamp' in x):
@@ -57,7 +57,7 @@ for packet in packets:
                 try:
                     port['end'] = timeStamp[1]
                     if port['start'] == -1:
-                        port['start'] = timestamp[0]
+                        port['start'] = timeStamp[0]
                 except: 
                     pass
                 
