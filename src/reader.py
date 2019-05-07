@@ -55,7 +55,7 @@ for packet in packets:
                 # if so, we wan to update the end field
                 port = sourcePorts[IP.src]
                 try:
-                    if timeStamp[1] != 0:
+                    if timeStamp[1] > 0:
                         port['end'] = timeStamp[1]
                     if port['start'] == -1:
                         port['start'] = timeStamp[0]
