@@ -1,5 +1,7 @@
 from scapy.all import *
 import datetime
+from itertools import groupby
+from operator import itemgetter
 
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
@@ -85,25 +87,8 @@ for key, val in sourcePorts.items():
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
         # print(portRange)
-        j = 0
-        k = 0
-        print(portRange)
-        rangeList = []
-        while k != (len(portRange)) -1:
-            print(portRange[k])
-            print(portRange[j])
-            print("k: " + str(k))
-            print("j: " + str(j))
-            if portRange[k] - portRange[j] <= 1:
-                rangeList.append(portRange[k])
-                k = k + 1
-            if portRange[k] - portRange[j] > 1:
-                print("Port " + str(rangeList[0]) + " ]------> " + "Port " + str( rangeList[ len(rangeList) - 1 ] ))
-                j = k
-                rangeList = []
-        print("Port " + str(portRange[0]) + " ]------> " + "Port " + str( portRange[ len(portRange) - 1 ] ))
-        print("")
-    # print(IP.src)
+        for k, g in groupby( enumerate(portRange), lambda a,b: a-b):
+            print (map(itemgetter(1), g))
     # print(TCP.dport)
     # print(packet['TCP'].sport)
     # print(packet['TCP'])
