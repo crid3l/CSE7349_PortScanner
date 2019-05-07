@@ -84,7 +84,6 @@ for key, val in sourcePorts.items():
         print("IP " + key + " likely engaged in Port Scanning")
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
-        str = ""
         print("Port " + str(portRange[0]) + " ]------> " + "Port " + str( portRange[ len(portRange) ] ))
         print("")
     # print(IP.src)
