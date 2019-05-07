@@ -79,7 +79,7 @@ for key, val in sourcePorts.items():
         if i >= 10:
             break
     if i >= 10:
-        portRange = val['dst'].key().sort()
+        portRange = val['dst'].keys().sort()
         
         print("IP " + key + " likely engaged in Port Scanning")
         str = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
