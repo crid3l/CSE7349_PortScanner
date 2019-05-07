@@ -43,7 +43,6 @@ for packet in packets:
         if IP.dst == "129.119.201.21":
             # check if current packet TCP field exist in sourceport list
             if IP.src in sourcePorts:
-
                 port = sourcePorts[IP.src]
                 # if so, we wan to update the end field
                 port['end'] = packet.time
@@ -53,7 +52,7 @@ for packet in packets:
                 else:
                     port['dst'][TCP.dport] = 1
                 sourcePorts[IP.src] = port
-                
+
             # or initialize a new  port in the list
             else:
                 try:
@@ -64,6 +63,8 @@ for packet in packets:
                         }
                     }
                 sourcePorts[IP.src] = x
+        else:
+            continue
     except IndentationError as e:
         print(e)
         packet.show()
