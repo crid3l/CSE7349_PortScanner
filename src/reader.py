@@ -87,6 +87,7 @@ for key, val in sourcePorts.items():
         # print(portRange)
         j = 0
         k = 0
+        print(portRange)
         rangeList = []
         while k != (len(portRange)) -1:
             print(portRange[k])
