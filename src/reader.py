@@ -46,7 +46,8 @@ for packet in packets:
             if IP.src in sourcePorts:
                 port = sourcePorts[IP.src]
                 # if so, we wan to update the end field
-                if port['end'] < packet.time:
+                
+                if 'end' not in port or port['end'] < packet.time:
                     port['end'] = packet.time
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
