@@ -13,7 +13,6 @@ print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
-    packet.show()
     try:
         IP = {}
         if 'IP' in packet:
@@ -57,6 +56,8 @@ for packet in packets:
                 port = sourcePorts[IP.src]
                 try:
                     port['end'] = timeStamp[1]
+                    if port['start'] == -1:
+                        port['start'] = timestamp[0]
                 except: 
                     pass
                 
