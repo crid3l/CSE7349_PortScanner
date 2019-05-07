@@ -37,17 +37,21 @@ for packet in packets:
         # print("Options: " + str(TCP.options))
         # print("Flags:   " + str(TCP.flags))
         # print("Window:  " + str(TCP.window))
+        foundTimeStamp = False
         timeStamp = ()
         if(flag):
             if len(TCP.options) != 0:
                 for x in TCP.options:
                     if('Timestamp' in x):
                         try:
+                            foundTimeStamp = True
                             timeStamp = x[1]
                             print(x)
                         except IndexError as e:
                             pass
                         # print(timeStamp)
+        if foundTimeStamp == False:
+            packet.show()
 
         # check if address is local
         if IP.dst == "129.119.201.21":
