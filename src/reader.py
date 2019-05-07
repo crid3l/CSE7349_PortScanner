@@ -93,7 +93,7 @@ for key, val in sourcePorts.items():
             print(portRange[j])
             print("k: " + str(k))
             print("j: " + str(j))
-            if portRange[k] - portRange[j] == 1:
+            if portRange[k] - portRange[j] <= 1:
                 rangeList.append(portRange[k])
                 k = k + 1
             if portRange[k] - portRange[j] > 1:
