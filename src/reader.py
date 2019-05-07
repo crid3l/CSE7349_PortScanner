@@ -9,7 +9,7 @@ sourcePorts = {}
 
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
-packets = rdpcap(basePath + paths[2])
+packets = rdpcap(basePath + paths[0])
 print("")
 # Let's iterate through every packet
 for packet in packets:
