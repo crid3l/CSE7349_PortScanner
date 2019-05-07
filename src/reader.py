@@ -9,11 +9,13 @@ sourcePorts = {}
 
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
-packets = rdpcap(basePath + paths[2])
+#packets = rdpcap(basePath + paths[2])
+packets = rdpcap("somto.pcapng")
 print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
+    print(packet['IP'])
     try:
         IP = {}
         if 'IP' in packet:
@@ -41,7 +43,7 @@ for packet in packets:
                         # print(timeStamp)
 
         # check if address is local
-        if IP.dst == "129.119.201.21":
+        if IP.dst == "10.8.238.94":
             # check if current packet TCP field exist in sourceport list
             if IP.src in sourcePorts:
                 port = sourcePorts[IP.src]
@@ -72,19 +74,19 @@ for packet in packets:
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
 for key, val in sourcePorts.items():
-    i = 0
-    for dst, cnt in val['dst'].items():
-        if cnt <= 3:
-            i = i + 1
-        if i >= 10:
-            break
-    if i >= 10:
-        print("IP " + key + " likely engaged in Port Scanning")
-        str = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
-        print(str)
-        str = ""
-        print("")
-    # print(IP.src)
-    # print(TCP.dport)
-    # print(packet['TCP'].sport)
-    # print(packet['TCP'])
+   portList = []
+   i = 0
+   for dst, cnt in val['dst'].items():
+       if cnt <= 3:
+           i = i + 1
+           portList.append(dst)
+       if i >= 10:
+           break
+   if i >= 10:
+       portRange = val['dst'].keys()
+       portRange.sort()
+       print("IP " + key + " likely engaged in Port Scanning")
+       time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
+       print(time)
+       print("Ports: ")
+       print(portList)

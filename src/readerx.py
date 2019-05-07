@@ -1,11 +1,27 @@
 from scapy.all import *
 import datetime
+import socket  
+import sys
 
-def parsePacketList(packets):
-    sourcePorts = {}
+
+sourcePorts = {}
+
+def parsePacketList(packets, IPAddr):
+    global sourcePorts
+
     # Let's iterate through every packet
     for packet in packets:
         # print("$$$$$*****PACKET-BEGIN*****$$$$$")
+
+        counter = 0
+        while True:
+            layer = packet.getlayer(counter)
+            if layer is None:
+                break
+            else:
+                #print(layer.name)
+                counter = counter + 1
+
         try:
             IP = {}
             if 'IP' in packet:
@@ -32,8 +48,10 @@ def parsePacketList(packets):
             # print("Window:  " + str(TCP.window))
                             # print(timeStamp)
 
+
             # check if address is local
-            if IP.dst == "129.119.201.21":
+            #print("IP source " + IP.src)
+            if IP.dst == IPAddr:
                 # check if current packet TCP field exist in sourceport list
                 if IP.src in sourcePorts:
                     port = sourcePorts[IP.src]
@@ -62,23 +80,54 @@ def parsePacketList(packets):
             print(e)
             packet.show()
             continue
-        # print("$$$$$*****PACKET-END*****$$$$$")
+
     for key, val in sourcePorts.items():
+        portList = []
         i = 0
         for dst, cnt in val['dst'].items():
             if cnt <= 3:
                 i = i + 1
+                portList.append(dst)
             if i >= 10:
                 break
         if i >= 10:
+            portRange = val['dst'].keys()
+            portRange.sort()
             print("IP " + key + " likely engaged in Port Scanning")
-            str = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
-            print(str)
-            str = ""
-            print("")
+            time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
+            print(time)
+            print("Current ports affected: ")
+            print(portList)
+            print("\n")
+
 
 def main():
-    print("--ReaderX is mean to be exported--")
+    print("Starting live Scan")
+    print("Press any key to exit")
+    
+    count = 0
+    hostname = socket.gethostname()    
+    IPAddr = socket.gethostbyname(hostname) 
+    print("Host IP to protect " + IPAddr)
+    print("Analyzing packets ...")
+
+    while True:
+        try:
+            #packets = rdpcap("tcp_syn_scan.pcapng")
+            packets = sniff(filter="tcp", count = 100)
+            parsePacketList(packets, IPAddr)
+            count = count + 1
+
+        except KeyboardInterrupt:
+            print('Interrupted')
+            try:
+                exit()
+                sys.exit(0)
+            except SystemExit:
+                os._exit(0)
+
+
+
 
 if __name__ == '__main__':
     main()

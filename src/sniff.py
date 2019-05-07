@@ -13,7 +13,7 @@ def custom_action(packet):
    print ("end of packet ---------------")
  
 ## Setup sniff, filtering for IP traffic
-sniff(filter="tcp", prn=custom_action)
+p = sniff(filter="tcp", prn=custom_action)
  
 ## Print out packet count per A <--> Z address pair
 print("done")
