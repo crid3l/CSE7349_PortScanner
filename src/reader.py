@@ -22,6 +22,14 @@ print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
+    counter = 0
+    while True:
+        layer = packet.getlayer(counter)
+        if layer is None:
+            break
+        else:
+            print(layer.name)
+            counter = counter + 1
     try:
         IP = {}
         if 'IP' in packet:
