@@ -2,12 +2,18 @@ from scapy.all import *
 import datetime
 from itertools import groupby
 from operator import itemgetter
+import sys
 
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
 
 destinationPorts = {}
 sourcePorts = {}
+
+ip = "129.119.201.21"
+
+if len(sys.argv) == 2:
+    ip = sys.argv[1]
 
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
@@ -43,7 +49,7 @@ for packet in packets:
                         # print(timeStamp)
 
         # check if address is local
-        if IP.dst == "129.119.201.21":
+        if IP.dst == ip:
             # check if current packet TCP field exist in sourceport list
             if IP.src in sourcePorts:
                 port = sourcePorts[IP.src]
