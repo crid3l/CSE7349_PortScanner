@@ -1,4 +1,5 @@
 from scapy.all import *
+import datetime
 
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
@@ -77,7 +78,7 @@ for key, val in sourcePorts.items():
             break
     if i >= 10:
         print("IP " + key + " likely engaged in Port Scanning")
-        print( str(val['start'])  +  " to " + str(val['end']) )
+        str = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " datetime.datetime.fromtimestamp(val['end']).strftime('%c')
     # print(IP.src)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
