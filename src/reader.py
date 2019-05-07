@@ -22,7 +22,6 @@ print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
-    packet.show()
     try:
         IP = {}
         if 'IP' in packet:
