@@ -85,8 +85,8 @@ for key, val in sourcePorts.items():
     for dst, cnt in val['dst'].items():
         if cnt <= 3:
             i = i + 1
-        if i >= 10:
             portList.append(dst)
+        if i >= 10:
             break
     if i >= 10:
         portRange = val['dst'].keys()
