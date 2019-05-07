@@ -92,7 +92,7 @@ for packet in packets:
 print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
-    print(val)
+    print(val['dst'])
     # print(IP.src)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
