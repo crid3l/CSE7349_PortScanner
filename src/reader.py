@@ -1,3 +1,4 @@
+#this program accepts a list of file from path
 from scapy.all import *
 import datetime
 
@@ -74,6 +75,7 @@ for packet in packets:
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
 for key, val in sourcePorts.items():
+<<<<<<< HEAD
    portList = []
    i = 0
    for dst, cnt in val['dst'].items():
@@ -90,3 +92,21 @@ for key, val in sourcePorts.items():
        print(time)
        print("Ports: ")
        print(portList)
+=======
+    i = 0
+    for dst, cnt in val['dst'].items():
+        if cnt <= 3:
+            i = i + 1
+        if i >= 10:
+            break
+    if i >= 10:
+        print("IP " + key + " likely engaged in Port Scanning")
+        str = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
+        print(str)
+        str = ""
+        print("")
+    # print(IP.src)
+    # print(TCP.dport)
+    # print(packet['TCP'].sport)
+    # print(packet['TCP'])
+>>>>>>> c8a2b0647ebb845b4800920546379773c7ef982b
