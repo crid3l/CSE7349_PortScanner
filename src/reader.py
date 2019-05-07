@@ -91,8 +91,8 @@ for key, val in sourcePorts.items():
         while k != (len(portRange)) -1:
             print(portRange[k])
             print(portRange[j])
-            print(k)
-            print(j)
+            print("k: " + str(k))
+            print("j: " + str(j))
             if portRange[k] - portRange[j] == 1:
                 rangeList.append(portRange[k])
                 k = k + 1
