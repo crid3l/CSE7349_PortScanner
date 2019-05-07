@@ -91,7 +91,6 @@ for packet in packets:
     # print("$$$$$*****PACKET-END*****$$$$$")
 print(destinationPorts)
 for key, val in sourcePorts.items():
-    print(key)
     i = 0
     for dst, cnt in val['dst'].items():
         if cnt <= 3:
