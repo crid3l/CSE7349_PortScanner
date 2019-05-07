@@ -98,7 +98,7 @@ for key, val in sourcePorts.items():
             break
     if i >= 10:
         print("IP " + key + " likely engaged in Port Scanning")
-        print("Across" key['start'] + " to " + key['end'])
+        print("Across" + key['start'] + " to " + key['end'])
         print("")
     # print(IP.src)
     # print(TCP.dport)
