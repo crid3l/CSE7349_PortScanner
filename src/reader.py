@@ -26,8 +26,8 @@ for packet in packets:
         if 'TCP' in packet:
             TCP = packet['TCP']
             flag = True
-        elif 'UDP' in packet:
-            TCP = packet['UDP']
+        # elif 'UDP' in packet:
+        #     TCP = packet['UDP']
         else:
             continue
 
