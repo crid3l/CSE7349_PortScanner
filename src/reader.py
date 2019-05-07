@@ -52,16 +52,14 @@ for packet in packets:
                 else:
                     port['dst'][TCP.dport] = 1
                 sourcePorts[IP.src] = port
-
             # or initialize a new  port in the list
             else:
-                try:
-                    x = {
-                        "start": packet.time,
-                        "dst": {
-                            TCP.dport : 1
-                        }
+                x = {
+                    "start": packet.time,
+                    "dst": {
+                        TCP.dport : 1
                     }
+                }
                 sourcePorts[IP.src] = x
         else:
             continue
