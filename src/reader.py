@@ -84,7 +84,7 @@ for key, val in sourcePorts.items():
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
         str = ""
-        print(val)
+        print(val['dst'].key())
         print("Port " + str(portRange[0]) + " ]------> " + "Port " + str( portRange[ len(portRange) ] ))
         print("")
     # print(IP.src)
