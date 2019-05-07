@@ -87,8 +87,15 @@ for key, val in sourcePorts.items():
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
         # print(portRange)
+        string = ""
+        j = 0
         for k in portRange:
-            print(k)
+            if j < 5:
+                string = string + " " + str(k)
+                j = j + 1
+            else:
+                string = string = "\n" + str(k)
+                j = 0
     # print(TCP.dport)
     # print(packet['TCP'].sport)
     # print(packet['TCP'])
