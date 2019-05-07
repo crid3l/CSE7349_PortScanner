@@ -87,7 +87,7 @@ for key, val in sourcePorts.items():
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
         # print(portRange)
-        for k, g in groupby( enumerate(portRange), lambda (a, b): a-b):
+        for k, g in groupby( enumerate(portRange), lambda a__b: a__b):
             print (map(itemgetter(1), g))
     # print(TCP.dport)
     # print(packet['TCP'].sport)
