@@ -44,6 +44,7 @@ for packet in packets:
                     if('Timestamp' in x):
                         try:
                             timeStamp = x[1]
+                            print(x)
                         except IndexError as e:
                             pass
                         # print(timeStamp)
