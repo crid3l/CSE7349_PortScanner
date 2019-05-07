@@ -14,7 +14,7 @@ print("")
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
     if True:
-        packet.show()
+        print(packet.time)
     else:
         continue
     try:
