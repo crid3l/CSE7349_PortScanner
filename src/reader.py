@@ -92,7 +92,14 @@ for packet in packets:
 print(destinationPorts)
 for key, val in sourcePorts.items():
     print(key)
-    print(val['dst'])
+    i = 0
+    for dst, cnt in val['dst'].items():
+        if cnt <= 3:
+            i = i + 1
+        if i >= 10:
+            break
+    if i >= 10:
+        print("IP " + key + " likely engaged in Port Scanning")
     # print(IP.src)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
