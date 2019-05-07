@@ -84,11 +84,15 @@ for key, val in sourcePorts.items():
         print("IP " + key + " likely engaged in Port Scanning")
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
-        print(portRange)
+        # print(portRange)
         j = 0
         k = 0
         rangeList = []
-        while k != len(portRange) -1:
+        while k != (len(portRange)) -1:
+            print(portRange[k])
+            print(portRange[j])
+            print(k)
+            print(j)
             if portRange[k] - portRange[j] == 1:
                 rangeList.append(portRange[k])
                 k = k + 1
