@@ -13,6 +13,10 @@ print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
+    if True:
+        packet.show()
+    else:
+        continue
     try:
         IP = {}
         if 'IP' in packet:
