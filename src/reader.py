@@ -1,4 +1,5 @@
 from scapy.all import *
+import datetime
 
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
@@ -8,7 +9,7 @@ sourcePorts = {}
 
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
-packets = rdpcap(basePath + paths[1])
+packets = rdpcap(basePath + paths[2])
 print("")
 # Let's iterate through every packet
 for packet in packets:
@@ -37,28 +38,17 @@ for packet in packets:
         # print("Options: " + str(TCP.options))
         # print("Flags:   " + str(TCP.flags))
         # print("Window:  " + str(TCP.window))
-        if(flag):
-            timeStamp = ()
-            if len(TCP.options) != 0:
-                for x in TCP.options:
-                    if('Timestamp' in x):
-                        try:
-                            timeStamp = x[1]
-                        except IndexError as e:
-                            pass
                         # print(timeStamp)
 
         # check if address is local
         if IP.dst == "129.119.201.21":
             # check if current packet TCP field exist in sourceport list
             if IP.src in sourcePorts:
-                # if so, we wan to update the end field
                 port = sourcePorts[IP.src]
-                try:
-                    port['end'] = timeStamp[1]
-                except: 
-                    pass
+                # if so, we wan to update the end field
                 
+                if 'end' not in port or port['end'] < packet.time:
+                    port['end'] = packet.time
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
                     port['dst'][TCP.dport] = port['dst'][TCP.dport] + 1
@@ -67,23 +57,15 @@ for packet in packets:
                 sourcePorts[IP.src] = port
             # or initialize a new  port in the list
             else:
-                try:
-                    x = {
-                        "start": timeStamp[0],
-                        "end": timeStamp[1],
-                        "dst": {
-                            TCP.dport : 1
-                        }
+                x = {
+                    "start": packet.time,
+                    "dst": {
+                        TCP.dport : 1
                     }
-                except :
-                    x = {
-                        "start": -1,
-                        "end": -1,
-                        "dst": {
-                            TCP.dport : 1
-                        }
-                    }
+                }
                 sourcePorts[IP.src] = x
+        else:
+            continue
     except IndentationError as e:
         print(e)
         packet.show()
@@ -98,7 +80,9 @@ for key, val in sourcePorts.items():
             break
     if i >= 10:
         print("IP " + key + " likely engaged in Port Scanning")
-        print("Across" + str(val['start']) + " to " + str(val['end']))
+        str = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
+        print(str)
+        str = ""
         print("")
     # print(IP.src)
     # print(TCP.dport)
