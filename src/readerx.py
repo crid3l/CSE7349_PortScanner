@@ -1,3 +1,5 @@
+#this program accepts packets inputted 
+
 from scapy.all import *
 import datetime
 

@@ -1,3 +1,4 @@
+#this program accepts a list of file from path
 from scapy.all import *
 import datetime
 
