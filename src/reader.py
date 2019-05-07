@@ -13,10 +13,6 @@ print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
-    if True:
-        print(packet.time)
-    else:
-        continue
     try:
         IP = {}
         if 'IP' in packet:
@@ -41,55 +37,28 @@ for packet in packets:
         # print("Options: " + str(TCP.options))
         # print("Flags:   " + str(TCP.flags))
         # print("Window:  " + str(TCP.window))
-        foundTimeStamp = False
-        timeStamp = ()
-        if(flag):
-            if len(TCP.options) != 0:
-                for x in TCP.options:
-                    if('Timestamp' in x):
-                        try:
-                            foundTimeStamp = True
-                            timeStamp = x[1]
-                        except IndexError as e:
-                            pass
                         # print(timeStamp)
-        if foundTimeStamp == False:
-            packet.show()
 
         # check if address is local
         if IP.dst == "129.119.201.21":
             # check if current packet TCP field exist in sourceport list
             if IP.src in sourcePorts:
-                # if so, we wan to update the end field
+
                 port = sourcePorts[IP.src]
-                try:
-                    if timeStamp[1] > 0:
-                        port['end'] = timeStamp[1]
-                    if port['start'] <= 0:
-                        port['start'] = timeStamp[0]
-                except: 
-                    pass
-                
+                # if so, we wan to update the end field
+                port['end'] = packet.time
                 #and add or increment a new destination.
                 if TCP.dport in port['dst']:
                     port['dst'][TCP.dport] = port['dst'][TCP.dport] + 1
                 else:
                     port['dst'][TCP.dport] = 1
                 sourcePorts[IP.src] = port
+                
             # or initialize a new  port in the list
             else:
                 try:
                     x = {
-                        "start": timeStamp[0],
-                        "end": timeStamp[1],
-                        "dst": {
-                            TCP.dport : 1
-                        }
-                    }
-                except :
-                    x = {
-                        "start": -1,
-                        "end": -1,
+                        "start": packet.time,
                         "dst": {
                             TCP.dport : 1
                         }
