@@ -100,6 +100,7 @@ for key, val in sourcePorts.items():
             break
     if i >= 10:
         print("IP " + key + " likely engaged in Port Scanning")
+        print( str(val['start'])  +  " to " + str(val['end']) )
     # print(IP.src)
     # print(TCP.dport)
     # print(packet['TCP'].sport)
