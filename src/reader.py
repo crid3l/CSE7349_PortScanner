@@ -58,7 +58,7 @@ for packet in packets:
                 try:
                     if timeStamp[1] > 0:
                         port['end'] = timeStamp[1]
-                    if port['start'] == -1:
+                    if port['start'] <= 0:
                         port['start'] = timeStamp[0]
                 except: 
                     pass
