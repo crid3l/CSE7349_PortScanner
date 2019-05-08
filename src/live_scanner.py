@@ -110,34 +110,34 @@ def parsePacketList(packets, IPAddr):
             print("Current ports affected: ")
             print(portList)
             print("\n")
-        flagString = ""
-        if 'flags' in val:
-            x = val['flags']
-            FIN = 0x01
-            SYN = 0x02
-            RST = 0x04
-            PSH = 0x08
-            ACK = 0x10
-            URG = 0x20
-            ECE = 0x40
-            CWR = 0x80
-            if x & FIN:
-                flagString = flagString + "FIN "
-            if x & SYN:
-                flagString = flagString + "SYN "
-            if x & RST:
-                flagString = flagString + "RST "
-            if x & PSH:
-                flagString = flagString + "PSH "
-            if x & ACK:
-                flagString = flagString + "ACK "
-            if x & URG:
-                flagString = flagString + "URG "
-            if x & ECE:
-                flagString = flagString + "ECE "
-            if x & CWR:
-                flagString = flagString + "CWR "
-            print(flagString)
+    flagString = ""
+    if 'flags' in val:
+        x = val['flags']
+        FIN = 0x01
+        SYN = 0x02
+        RST = 0x04
+        PSH = 0x08
+        ACK = 0x10
+        URG = 0x20
+        ECE = 0x40
+        CWR = 0x80
+        if x & FIN:
+            flagString = flagString + "FIN "
+        if x & SYN:
+            flagString = flagString + "SYN "
+        if x & RST:
+            flagString = flagString + "RST "
+        if x & PSH:
+            flagString = flagString + "PSH "
+        if x & ACK:
+            flagString = flagString + "ACK "
+        if x & URG:
+            flagString = flagString + "URG "
+        if x & ECE:
+            flagString = flagString + "ECE "
+        if x & CWR:
+            flagString = flagString + "CWR "
+        print(flagString)
 
 
 def main():
