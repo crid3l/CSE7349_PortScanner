@@ -23,13 +23,8 @@ sourcePorts = {}
 ip = "129.119.201.21"
 
 
-<<<<<<< HEAD
 if len(sys.argv) >= 2:
     path = sys.argv[1]
-=======
-if len(sys.argv) == 3:
-    ip = sys.argv[2]
->>>>>>> 4f9cd2902202710939dd1f369756f7122b200da9
 
 if len(sys.argv) == 2:
     path = sys.argv[1]
@@ -39,6 +34,11 @@ if len(sys.argv) == 3:
 
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
+print("Starting live Scan")
+print("")
+
+print("Analyzing packets ...")
+print("")
 packets = rdpcap(path)
 print("")
 # Let's iterate through every packet
