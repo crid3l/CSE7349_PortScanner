@@ -1,6 +1,9 @@
 #this program accepts a list of file from path
 from scapy.all import *
 import datetime
+from itertools import groupby
+from operator import itemgetter
+import sys
 
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
@@ -8,15 +11,19 @@ paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
 destinationPorts = {}
 sourcePorts = {}
 
+ip = "129.119.201.21"
+
+if len(sys.argv) == 2:
+    ip = sys.argv[1]
+
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
-#packets = rdpcap(basePath + paths[2])
-packets = rdpcap("somto.pcapng")
+packets = rdpcap(basePath + paths[1])
 print("")
 # Let's iterate through every packet
 for packet in packets:
     # print("$$$$$*****PACKET-BEGIN*****$$$$$")
-    print(packet['IP'])
+    counter = 0
     try:
         IP = {}
         if 'IP' in packet:
@@ -44,7 +51,7 @@ for packet in packets:
                         # print(timeStamp)
 
         # check if address is local
-        if IP.dst == "10.8.238.94":
+        if IP.dst == ip:
             # check if current packet TCP field exist in sourceport list
             if IP.src in sourcePorts:
                 port = sourcePorts[IP.src]
@@ -64,7 +71,8 @@ for packet in packets:
                     "start": packet.time,
                     "dst": {
                         TCP.dport : 1
-                    }
+                    },
+                    "flags": TCP.flags
                 }
                 sourcePorts[IP.src] = x
         else:
@@ -75,19 +83,47 @@ for packet in packets:
         continue
     # print("$$$$$*****PACKET-END*****$$$$$")
 for key, val in sourcePorts.items():
-   portList = []
-   i = 0
-   for dst, cnt in val['dst'].items():
-       if cnt <= 3:
-           i = i + 1
-           portList.append(dst)
-       if i >= 10:
-           break
-   if i >= 10:
-       portRange = val['dst'].keys()
-       portRange.sort()
-       print("IP " + key + " likely engaged in Port Scanning")
-       time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
-       print(time)
-       print("Ports: ")
-       print(portList)
+    portList = []
+    i = 0
+    for dst, cnt in val['dst'].items():
+        if cnt <= 3:
+            i = i + 1
+            portList.append(dst)
+        if i >= 10:
+            break
+    if i >= 10:
+        portRange = val['dst'].keys()
+        portRange.sort()
+        print("IP " + key + " likely engaged in Port Scanning")
+        time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
+        print(time)
+        print("Ports: ")
+        print(portList)
+    flagString = ""
+    if 'flags' in val:
+        x = val['flags']
+        FIN = 0x01
+        SYN = 0x02
+        RST = 0x04
+        PSH = 0x08
+        ACK = 0x10
+        URG = 0x20
+        ECE = 0x40
+        CWR = 0x80
+        if x & FIN:
+            flagString = flagString + "FIN "
+        if x & SYN:
+            flagString = flagString + "SYN "
+        if x & RST:
+            flagString = flagString + "RST "
+        if x & PSH:
+            flagString = flagString + "PSH "
+        if x & ACK:
+            flagString = flagString + "ACK "
+        if x & URG:
+            flagString = flagString + "URG "
+        if x & ECE:
+            flagString = flagString + "ECE "
+        if x & CWR:
+            flagString = flagString + "CWR "
+        print(flagString)
