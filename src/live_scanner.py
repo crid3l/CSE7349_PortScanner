@@ -2,6 +2,10 @@
 #Spring 2019
 #Team: Muaz, Somto and Tyrone
 
+#program uses sniff function from Scapy to capture packets
+#analyze evey 100 packet and detemine if it is a scan
+#currenly the live scanner runes for 2 min 
+#can be extended to specific times
 
 from scapy.all import *
 import datetime
@@ -156,7 +160,7 @@ def main():
         end = time.time()
 
         #program will run for 2 minutes
-        if (end - start) > 300:
+        if (end - start) > 120:
             flag = False
 
     print("Max time reached. Program will now be terminated")

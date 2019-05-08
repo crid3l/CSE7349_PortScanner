@@ -2,6 +2,10 @@
 #Spring 2019
 #Team: Muaz, Somto and Tyrone
 
+#file takes in command line arguments as follows
+# python reader.py <file name> <ipaddress>
+# ipaddress is optional as it is currently set to 129.119.201.21
+
 from scapy.all import *
 import datetime
 from itertools import groupby
@@ -15,13 +19,15 @@ sourcePorts = {}
 ip = "129.119.201.21"
 
 
-if len(sys.argv) == 3:
-    path = sys.argv[2]
-    ip = sys.argv[1]
+if len(sys.argv) >= 2:
+    path = sys.argv[1]
 
 else:
     print("No file name provided")
     exit()
+
+if len(sys.argv) == 3: 
+    ip = sys.argv[2]
 
 # rdpcap comes from scapy and loads in our pcap file
 packets = path
