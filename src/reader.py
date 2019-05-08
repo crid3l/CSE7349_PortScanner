@@ -8,6 +8,8 @@ import sys
 basePath = "./../../../../opt/scans/"
 paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
 
+path = basePath + paths[0]
+
 destinationPorts = {}
 sourcePorts = {}
 
@@ -16,9 +18,12 @@ ip = "129.119.201.21"
 if len(sys.argv) == 2:
     ip = sys.argv[1]
 
+if len(sys.argv) == 3:
+    path = sys.argv[2]
+
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
-packets = rdpcap(basePath + paths[1])
+packets = rdpcap(path)
 print("")
 # Let's iterate through every packet
 for packet in packets:
