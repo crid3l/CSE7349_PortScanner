@@ -94,6 +94,7 @@ def parsePacketList(packets, IPAddr):
     for key, val in sourcePorts.items():
         portList = []
         i = 0
+        flagString = ""
         for dst, cnt in val['dst'].items():
             if cnt <= 3:
                 i = i + 1
@@ -110,7 +111,7 @@ def parsePacketList(packets, IPAddr):
             print("Current ports affected: ")
             print(portList)
             print("\n")
-        flagString = ""
+            print("Flags detected")
         if 'flags' in val:
             x = val['flags']
             FIN = 0x01
@@ -137,7 +138,8 @@ def parsePacketList(packets, IPAddr):
                 flagString = flagString + "ECE "
             if x & CWR:
                 flagString = flagString + "CWR "
-            print(flagString)
+        
+        print(flagString)
 
 
 def main():
@@ -157,7 +159,7 @@ def main():
 
     print("Host IP to protect " + IPAddr)
     print("Analyzing packets ...")
-    
+
     start = time.time()
     while flag:
         #packets = rdpcap("tcp_syn_scan.pcapng")
@@ -166,7 +168,7 @@ def main():
         end = time.time()
 
         #program will run for 2 minutes
-        if (end - start) > 120:
+        if (end - start) > 30:
             flag = False
 
     print("Max time reached. Program will now be terminated")
