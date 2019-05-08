@@ -156,7 +156,7 @@ def main():
         end = time.time()
 
         #program will run for 2 minutes
-        if (end - start) > 30:
+        if (end - start) > 300:
             flag = False
 
     print("Max time reached. Program will now be terminated")
