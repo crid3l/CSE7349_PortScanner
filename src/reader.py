@@ -12,6 +12,10 @@ from itertools import groupby
 from operator import itemgetter
 import sys
 
+basePath = "./../../../../opt/scans/"
+paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
+
+path = basePath + paths[0]
 
 destinationPorts = {}
 sourcePorts = {}
@@ -19,19 +23,23 @@ sourcePorts = {}
 ip = "129.119.201.21"
 
 
+<<<<<<< HEAD
 if len(sys.argv) >= 2:
     path = sys.argv[1]
+=======
+if len(sys.argv) == 3:
+    ip = sys.argv[2]
+>>>>>>> 4f9cd2902202710939dd1f369756f7122b200da9
 
-else:
-    print("No file name provided")
-    exit()
+if len(sys.argv) == 2:
+    path = sys.argv[1]
 
 if len(sys.argv) == 3: 
     ip = sys.argv[2]
 
 # rdpcap comes from scapy and loads in our pcap file
-packets = path
 print("Loading Packets")
+packets = rdpcap(path)
 print("")
 # Let's iterate through every packet
 for packet in packets:
