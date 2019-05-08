@@ -1,24 +1,31 @@
-#this program accepts a list of file from path
+#Network Security Port Scanner detector 
+#Spring 2019
+#Team: Muaz, Somto and Tyrone
+
 from scapy.all import *
 import datetime
 from itertools import groupby
 from operator import itemgetter
 import sys
 
-basePath = "./../../../../opt/scans/"
-paths = ["connect_scan.pcapng", "scan.pcapng",  "tcp_syn_scan.pcapng"]
 
 destinationPorts = {}
 sourcePorts = {}
 
 ip = "129.119.201.21"
 
-if len(sys.argv) == 2:
+
+if len(sys.argv) == 3:
+    path = sys.argv[2]
     ip = sys.argv[1]
 
+else:
+    print("No file name provided")
+    exit()
+
 # rdpcap comes from scapy and loads in our pcap file
+packets = path
 print("Loading Packets")
-packets = rdpcap(basePath + paths[1])
 print("")
 # Let's iterate through every packet
 for packet in packets:
@@ -81,7 +88,7 @@ for packet in packets:
         print(e)
         packet.show()
         continue
-    # print("$$$$$*****PACKET-END*****$$$$$")
+# print("$$$$$*****PACKET-END*****$$$$$")
 for key, val in sourcePorts.items():
     portList = []
     i = 0
@@ -94,11 +101,13 @@ for key, val in sourcePorts.items():
     if i >= 10:
         portRange = val['dst'].keys()
         portRange.sort()
-        print("IP " + key + " likely engaged in Port Scanning")
+        print("")
+        print("\033[93m {}\033[00m" .format("IP " + key + " likely engaged in Port Scanning"))
         time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
         print(time)
-        print("Ports: ")
+        print("Current ports affected: ")
         print(portList)
+        print("\n")
     flagString = ""
     if 'flags' in val:
         x = val['flags']

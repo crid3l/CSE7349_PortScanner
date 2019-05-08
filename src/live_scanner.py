@@ -106,6 +106,7 @@ def parsePacketList(packets, IPAddr):
             print("Current ports affected: ")
             print(portList)
             print("\n")
+        flagString = ""
         if 'flags' in val:
             x = val['flags']
             FIN = 0x01
@@ -155,7 +156,7 @@ def main():
         end = time.time()
 
         #program will run for 2 minutes
-        if (end - start) > 120:
+        if (end - start) > 30:
             flag = False
 
     print("Max time reached. Program will now be terminated")
