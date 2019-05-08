@@ -20,10 +20,10 @@ ip = "129.119.201.21"
 
 
 if len(sys.argv) == 3:
-    ip = sys.argv[1]
+    ip = sys.argv[2]
 
-if len(sys.argv) == 3:
-    path = sys.argv[2]
+if len(sys.argv) == 2:
+    path = sys.argv[1]
 
 # rdpcap comes from scapy and loads in our pcap file
 print("Loading Packets")
