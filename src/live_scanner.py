@@ -1,4 +1,7 @@
-#this program accepts packets inputted 
+#Network Security Port Scanner detector 
+#Spring 2019
+#Team: Muaz, Somto and Tyrone
+
 
 from scapy.all import *
 import datetime
@@ -95,10 +98,12 @@ def parsePacketList(packets, IPAddr):
         if i >= 10:
             portRange = val['dst'].keys()
             portRange.sort()
-            print("IP " + key + " likely engaged in Port Scanning")
+            print("")
+            print("\033[93m {}\033[00m" .format("IP " + key + " likely engaged in Port Scanning"))
             time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
             print(time)
-            print("Current ports affected: " + portList)
+            print("Current ports affected: ")
+            print(portList)
             print("\n")
 
 
@@ -126,8 +131,6 @@ def main():
             flag = False
 
     print("Max time reached. Program will now be terminated")
-
-
 
 
 
