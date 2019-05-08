@@ -4,7 +4,7 @@ from scapy.all import *
 import datetime
 import socket  
 import sys
-
+import time
 
 sourcePorts = {}
 
@@ -98,8 +98,7 @@ def parsePacketList(packets, IPAddr):
             print("IP " + key + " likely engaged in Port Scanning")
             time = datetime.datetime.fromtimestamp(val['start']).strftime('%c') + " to " + datetime.datetime.fromtimestamp(val['end']).strftime('%c')
             print(time)
-            print("Current ports affected: ")
-            print(portList)
+            print("Current ports affected: " + portList)
             print("\n")
 
 
@@ -113,20 +112,21 @@ def main():
     print("Host IP to protect " + IPAddr)
     print("Analyzing packets ...")
 
-    while True:
-        try:
-            #packets = rdpcap("tcp_syn_scan.pcapng")
-            packets = sniff(filter="tcp", count = 100)
-            parsePacketList(packets, IPAddr)
-            count = count + 1
+    flag = True
 
-        except KeyboardInterrupt:
-            print('Interrupted')
-            try:
-                exit()
-                sys.exit(0)
-            except SystemExit:
-                os._exit(0)
+    start = time.time()
+    while flag:
+        #packets = rdpcap("tcp_syn_scan.pcapng")
+        packets = sniff(filter="tcp", count = 100)
+        parsePacketList(packets, IPAddr)
+        end = time.time()
+
+        #program will run for 2 minutes
+        if (end - start) > 120:
+            flag = False
+
+    print("Max time reached. Program will now be terminated")
+
 
 
 
